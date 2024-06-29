@@ -45,6 +45,15 @@ public class FormularioService {
         return mapper.toFomularioDTO(entity);
     }
 
+    // Método para buscar por ID
+    public FormularioDTO findById(Long id) {
+        FormularioEntity entity = repository.findById(id);
+        if (entity == null) {
+            throw new IllegalArgumentException("FormularioEntity not found with id " + id);
+        }
+        return mapper.toFomularioDTO(entity);
+    }
+
     public void deleteFormulario(Long id){
         repository.deleteById(id);
     }

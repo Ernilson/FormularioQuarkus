@@ -45,6 +45,20 @@ public class FormularioController {
         }
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findById(@PathParam("id") Long id) {
+        try {
+            FormularioDTO formularioDTO = service.findById(id);
+            return Response.ok(formularioDTO).build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
+
     @DELETE
     @Path("/{id}")
     @Transactional
